@@ -3,25 +3,32 @@
 <script>
   ;(function(){
     
-    data = 'MOre complicated stuff';
-    // no initial dom
-    d3.select('body')
-      .data( data )
-      .enter()
-      .append('a')
-        .attr('class','data')
-        .text(function(d){return d;})
-        .attr('alt', function(d){
-          return d;
-        })
-        .style( 'color', function(d,i){
-          if( i%2 == 0){
-              return 'blue';
-          } else {
-              return 'red';
-          }
+    d3.json( 'small.json', function(d){
+      
+      d3.select('body')
+        .selectAll('div.entry')
+        .data( d )
+        .call(function(s){
+           s.enter()
+            .append('div') 
+            .each( function(d,i){
+              d3.select(this)
+                .classed({
+                  entry: true,
+                  girl: i%2==0
+                })
+            })
+            .text( function(d){ return d['user'] + '  ' + d['reason'];})
+            .html( function(d){ 
+              return '<h1>'+d['user'] + '</h1><p>' + d['reason'] +'</p>';
+            })
+            
         });
-    
+        
+      
+    });
 
   })(); //iife
 </script>
+
+<div class="entry"></div>
