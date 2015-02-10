@@ -1,4 +1,6 @@
 <script src="//cdn.jsdelivr.net/g/d3js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+
 
 <script>
   ;(function(){
@@ -22,13 +24,32 @@
             .html( function(d){ 
               return '<h1>'+d['user'] + '</h1><p>' + d['reason'] +'</p>';
             })
+            .html(render)
             
         });
         
       
     });
-
+    
+    function render( d,i ){ 
+      var template = Handlebars.compile( d3.select('#template').html() );
+      return template( d );      
+    }
+    
   })(); //iife
+  
+  
 </script>
 
+  
+<script id="template" type="text/x-handlebars-template">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{user}}
+    </div>
+    <div class="panel-body">
+      {{reason}}
+    </div>
+  </div>
+</script>
 <div class="entry"></div>
