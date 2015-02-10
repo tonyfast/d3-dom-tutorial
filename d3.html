@@ -1,0 +1,13 @@
+<script src="//cdn.jsdelivr.net/g/d3js"></script>
+
+<script>
+  ;(function(){
+    data = [1,2,5,7,8,3,4];
+    d3.select('body')
+      .data( data )
+      .enter()
+      .append('div')
+      .attr('class','data')
+      .text(function(d){return d;})
+    })()
+</script>
