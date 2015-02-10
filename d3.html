@@ -2,12 +2,26 @@
 
 <script>
   ;(function(){
-    data = [1,2,5,7,8,3,4];
+    
+    data = 'MOre complicated stuff';
+    // no initial dom
     d3.select('body')
       .data( data )
       .enter()
-      .append('div')
-      .attr('class','data')
-      .text(function(d){return d;})
-    })()
+      .append('a')
+        .attr('class','data')
+        .text(function(d){return d;})
+        .attr('alt', function(d){
+          return d;
+        })
+        .style( 'color', function(d,i){
+          if( i%2 == 0){
+              return 'blue';
+          } else {
+              return 'red';
+          }
+        });
+    
+
+  })(); //iife
 </script>
